@@ -1,5 +1,6 @@
 import numpy as np
 import cv2
+import datetime
 
 cap = cv2.VideoCapture(0)
 
@@ -13,8 +14,12 @@ while(True):
 
     # Display the resulting frame
     cv2.imshow('frame now', frame)
-    if cv2.waitKey(1) & 0xFF == ord('q'):
+    c = cv2.waitKey(0);
+    if c & 0xFF == ord('q'):
         break
+    elif c & 0xff == ord('s'):
+        file = "./" + datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S") + ".jpg"
+        cv2.imwrite(file, frame)
 
 # When everything done, release the capture
 cap.release()
